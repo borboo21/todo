@@ -1,6 +1,13 @@
 import styles from './App.module.css';
+import {useRequestEditTodo,useRequestDeleteTodo} from './hooks';
 
-export const TodoContainer = ({ id,completed,todo,requestDeleteTodo,requestEditTodo,edit,setEditInput,setEdit }) => {
+export const TodoContainer = ({ id,completed,todo,refreshProducts,setTodos,todos}) => {
+
+	const { edit, setEdit, setEditInput, requestEditTodo } =
+		useRequestEditTodo(refreshProducts);
+
+	const { requestDeleteTodo } = useRequestDeleteTodo(refreshProducts, setTodos, todos);
+
 	return(
 	<div className={styles.container} key={id}>
 		{edit === id? (<form className={styles.editForm}>

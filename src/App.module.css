@@ -3,7 +3,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 600px;
+	width: 650px;
 	min-height: 40vh;
 	flex-wrap: wrap;
 }
@@ -141,6 +141,7 @@
 .editInput {
 	height: 20px;
 	padding-left: 10px;
+	font-size: large;
 }
 
 .saveInput {

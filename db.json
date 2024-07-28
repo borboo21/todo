@@ -1,3 +1,19 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": 1722205477048,
+      "todo": "1234",
+      "complete": false
+    },
+    {
+      "id": 1722205480816,
+      "todo": "5123",
+      "complete": false
+    },
+    {
+      "id": 1722206588479,
+      "todo": "11111",
+      "complete": false
+    }
+  ]
 }
