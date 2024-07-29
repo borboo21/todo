@@ -3,13 +3,17 @@ import { useState } from 'react';
 export const useRequestEditTodo = (refreshProducts) => {
 	const [editId, setEditId] = useState(null);
 	const [editInput, setEditInput] = useState('');
-	const handleEditClick = (id, todo) => {
+
+	const handlerEditClick = (id, todo) => {
 		setEditId(id);
 		setEditInput(todo);
 		console.log(editId, editInput);
 	};
+
 	const requestEditTodo = (id, todo) => {
-		fetch(`http://localhost:3005/todos/${id}`, {
+		setEditId(id);
+		setEditInput(todo);
+		fetch(`http://localhost:3005/todos/${editId}`, {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
@@ -20,7 +24,14 @@ export const useRequestEditTodo = (refreshProducts) => {
 			.then((response) => {
 				refreshProducts();
 			})
-			.finally(() => setEditId(null), setEditInput(''));
+			.finally(() => setEditId(null));
 	};
-	return { editId, setEditId, setEditInput, requestEditTodo, handleEditClick };
+	return {
+		editId,
+		setEditId,
+		editInput,
+		setEditInput,
+		requestEditTodo,
+		handlerEditClick,
+	};
 };

@@ -4,8 +4,10 @@ import {useRequestEditTodo,useRequestDeleteTodo,useRequestGetTodo} from '../hook
 export const TodoList = ({ displayedTasks,refreshProductsFlag, refreshProducts}) => {
 
 	const { isLoading, todos, setTodos } = useRequestGetTodo(refreshProductsFlag);
-	const { editId, setEditId, setEditInput, requestEditTodo } =
+
+	const { editId, setEditInput, editInput, requestEditTodo, handlerEditClick } =
 		useRequestEditTodo(refreshProducts);
+
 	const { requestDeleteTodo } = useRequestDeleteTodo(refreshProducts, setTodos, todos);
 
 	return(
@@ -19,6 +21,7 @@ export const TodoList = ({ displayedTasks,refreshProductsFlag, refreshProducts})
 						<input
 						className={styles.editInput}
 						onChange={(e) => setEditInput(e.target.value)}
+						value={editInput}
 						></input>
 						<button
 						className={styles.saveInput}
@@ -38,7 +41,7 @@ export const TodoList = ({ displayedTasks,refreshProductsFlag, refreshProducts})
 						Delete
 					</button>
 					<button className={styles.todoBtn}
-							onClick={() => setEditId(id)}>Correct</button>
+							onClick={() => handlerEditClick(id,todo)}>Correct</button>
 				</div>
 				</>)}
 			</div>
