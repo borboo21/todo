@@ -1,21 +1,21 @@
 import './index.css';
 import styles from './App.module.css';
 import { useState } from 'react';
-import { TodoContainer } from './todo-container';
-import { FindBlock } from './find-block';
-import { TodoPusher } from './todo-pusher';
+import { FindBlock } from './components/find-block';
+import { TodoPusher } from './components/todo-pusher';
 import {
 	useRequestAddTodo,
 	useRequestGetTodo,
 	useFilterTodo,
 	useFindTodo,
 } from './hooks';
+import { TodoList } from './components/todo-list';
 
 export const App = () => {
 	const [refreshProductsFlag, setRefreshProductsFlag] = useState(false);
 	const refreshProducts = () => setRefreshProductsFlag(!refreshProductsFlag);
 
-	const { isLoading, todos, setTodos } = useRequestGetTodo(refreshProductsFlag);
+	const { todos, setTodos } = useRequestGetTodo(refreshProductsFlag);
 	const { isCreating, requestAddTodo, todoInput, setTodoInput } = useRequestAddTodo(
 		refreshProducts,
 		setTodos,
@@ -33,22 +33,11 @@ export const App = () => {
 				isFilter={isFilter}
 			/>
 			<div className={styles.main}>
-				<div className={styles.todoList}>
-					{isLoading ? (
-						<div className={styles.loader}></div>
-					) : (
-						displayedTasks.map(({ id, todo, completed }) => (
-							<TodoContainer
-								id={id}
-								todo={todo}
-								todos={todos}
-								setTodos={setTodos}
-								completed={completed}
-								refreshProducts={refreshProducts}
-							/>
-						))
-					)}
-				</div>
+				<TodoList
+					displayedTasks={displayedTasks}
+					refreshProducts={refreshProducts}
+					refreshProductsFlag={refreshProductsFlag}
+				/>
 			</div>
 			<TodoPusher
 				todoInput={todoInput}

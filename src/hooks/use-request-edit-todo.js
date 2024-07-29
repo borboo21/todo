@@ -1,10 +1,14 @@
 import { useState } from 'react';
 
 export const useRequestEditTodo = (refreshProducts) => {
-	const [edit, setEdit] = useState(null);
+	const [editId, setEditId] = useState(null);
 	const [editInput, setEditInput] = useState('');
-	const requestEditTodo = (id) => {
-		setEdit(id);
+	const handleEditClick = (id, todo) => {
+		setEditId(id);
+		setEditInput(todo);
+		console.log(editId, editInput);
+	};
+	const requestEditTodo = (id, todo) => {
 		fetch(`http://localhost:3005/todos/${id}`, {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -16,7 +20,7 @@ export const useRequestEditTodo = (refreshProducts) => {
 			.then((response) => {
 				refreshProducts();
 			})
-			.finally(() => setEdit(null));
+			.finally(() => setEditId(null), setEditInput(''));
 	};
-	return { edit, setEdit, setEditInput, requestEditTodo };
+	return { editId, setEditId, setEditInput, requestEditTodo, handleEditClick };
 };

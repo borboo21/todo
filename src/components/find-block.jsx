@@ -1,4 +1,4 @@
-import styles from './App.module.css';
+import styles from '/Educational/Projects/VSCode/3-module/project-5/src/App.module.css';
 
 export const FindBlock = ({setFindValue,setIsFilter,isFilter}) => {
 	return(
