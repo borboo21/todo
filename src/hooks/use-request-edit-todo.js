@@ -7,12 +7,12 @@ export const useRequestEditTodo = (refreshProducts) => {
 	const handlerEditClick = (id, todo) => {
 		setEditId(id);
 		setEditInput(todo);
-		console.log(editId, editInput);
+	};
+	const handleEditChange = (event) => {
+		setEditInput(event.target.value);
 	};
 
-	const requestEditTodo = (id, todo) => {
-		setEditId(id);
-		setEditInput(todo);
+	const requestEditTodo = () => {
 		fetch(`http://localhost:3005/todos/${editId}`, {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -33,5 +33,6 @@ export const useRequestEditTodo = (refreshProducts) => {
 		setEditInput,
 		requestEditTodo,
 		handlerEditClick,
+		handleEditChange,
 	};
 };

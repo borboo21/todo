@@ -3,13 +3,13 @@ import styles from './App.module.css';
 import { useState } from 'react';
 import { FindBlock } from './components/find-block';
 import { TodoPusher } from './components/todo-pusher';
+import { TodoList } from './components/todo-list';
 import {
 	useRequestAddTodo,
 	useRequestGetTodo,
 	useFilterTodo,
 	useFindTodo,
 } from './hooks';
-import { TodoList } from './components/todo-list';
 
 export const App = () => {
 	const [refreshProductsFlag, setRefreshProductsFlag] = useState(false);
@@ -36,7 +36,6 @@ export const App = () => {
 				<TodoList
 					displayedTasks={displayedTasks}
 					refreshProducts={refreshProducts}
-					refreshProductsFlag={refreshProductsFlag}
 				/>
 			</div>
 			<TodoPusher
