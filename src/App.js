@@ -9,6 +9,8 @@ import {
 	useRequestGetTodo,
 	useFilterTodo,
 	useFindTodo,
+	useRequestDeleteTodo,
+	useRequestEditTodo,
 } from './hooks';
 
 export const App = () => {
@@ -23,6 +25,8 @@ export const App = () => {
 	);
 	const { findTodo, setFindValue } = useFindTodo(todos);
 	const { setIsFilter, displayedTasks, isFilter } = useFilterTodo(findTodo);
+	const { requestDeleteTodo } = useRequestDeleteTodo(refreshProducts, setTodos, todos);
+	const { requestEditTodo } = useRequestEditTodo(refreshProducts);
 
 	return (
 		<div className={styles.app}>
@@ -36,6 +40,8 @@ export const App = () => {
 				<TodoList
 					displayedTasks={displayedTasks}
 					refreshProducts={refreshProducts}
+					onDelete={requestDeleteTodo}
+					onSave={requestEditTodo}
 				/>
 			</div>
 			<TodoPusher

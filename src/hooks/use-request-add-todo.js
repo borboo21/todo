@@ -4,8 +4,8 @@ export const useRequestAddTodo = (refreshProducts, setTodos, todos) => {
 	const [isCreating, setIsCreating] = useState(false);
 	const [todoInput, setTodoInput] = useState('');
 	const newTodo = {
-		id: Date.now(),
-		todo: todoInput,
+		id: Date.now().toString(),
+		title: todoInput,
 		complete: false,
 	};
 	const requestAddTodo = () => {

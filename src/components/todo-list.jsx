@@ -2,26 +2,22 @@ import styles from '/Educational/Projects/VSCode/3-module/project-5/src/App.modu
 import { useRequestGetTodo } from '../hooks';
 import { TodoItem } from './todo-item';
 
-export const TodoList = ({ displayedTasks, refreshProducts }) => {
-	const { isLoading, todos, setTodos } = useRequestGetTodo();
+export const TodoList = ({ displayedTasks, refreshProducts, ...rest }) => {
+	const { isLoading } = useRequestGetTodo();
 
 	return (
 		<div className={styles.todoList}>
 			{isLoading ? (
 				<div className={styles.loader}></div>
 			) : (
-				displayedTasks.map(({ id, todo, completed }) => (
-					<div className={styles.container} key={id}>
-						<TodoItem
-							key={id}
-							id={id}
-							todo={todo}
-							todos={todos}
-							setTodos={setTodos}
-							completed={completed}
-							refreshProducts={refreshProducts}
-						/>
-					</div>
+				displayedTasks.map((todo) => (
+					<TodoItem
+						{...rest}
+						key={todo.id}
+						todo={todo}
+						completed={todo.completed}
+						refreshProducts={refreshProducts}
+					/>
 				))
 			)}
 		</div>

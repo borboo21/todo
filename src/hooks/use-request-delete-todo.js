@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const useRequestDeleteTodo = (refreshProducts, setTodos, todos) => {
+export const useRequestDeleteTodo = (refreshProducts) => {
 	const [isDeleting, setIsDeleting] = useState(false);
 
 	const requestDeleteTodo = (id) => {
@@ -10,8 +10,6 @@ export const useRequestDeleteTodo = (refreshProducts, setTodos, todos) => {
 		})
 			.then((rawResponse) => rawResponse.json())
 			.then((response) => {
-				const newTodos = todos.filter((todo) => todo.id !== id);
-				setTodos(newTodos);
 				refreshProducts();
 			})
 			.finally(() => setIsDeleting(false));

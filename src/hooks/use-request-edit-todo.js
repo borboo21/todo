@@ -4,20 +4,12 @@ export const useRequestEditTodo = (refreshProducts) => {
 	const [editId, setEditId] = useState(null);
 	const [editInput, setEditInput] = useState('');
 
-	const handlerEditClick = (id, todo) => {
-		setEditId(id);
-		setEditInput(todo);
-	};
-	const handleEditChange = (event) => {
-		setEditInput(event.target.value);
-	};
-
-	const requestEditTodo = () => {
-		fetch(`http://localhost:3005/todos/${editId}`, {
+	const requestEditTodo = (id, editInput) => {
+		fetch(`http://localhost:3005/todos/${id}`, {
 			method: 'PATCH',
 			headers: { 'Content-Type': 'application/json;charset=utf-8' },
 			body: JSON.stringify({
-				todo: editInput,
+				title: editInput,
 			}),
 		})
 			.then((rawResponse) => rawResponse.json())
@@ -32,7 +24,5 @@ export const useRequestEditTodo = (refreshProducts) => {
 		editInput,
 		setEditInput,
 		requestEditTodo,
-		handlerEditClick,
-		handleEditChange,
 	};
 };
